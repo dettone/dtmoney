@@ -1,65 +1,31 @@
+import { SummaryCard, SummaryContainer } from "./styles";
+import {ArrowCircleDown, ArrowCircleUp, CurrencyDollar} from "phosphor-react"
+export function Summary(){
+return (<SummaryContainer>
+    <SummaryCard>
+        <header>
+            <span>Entradas</span>
+            <ArrowCircleUp size={32} color="#00b37e" />
+        </header>
 
-import {Container } from  './styles';
-import incomeImg from '../../assets/income.svg';
-import outcomeImg from '../../assets/outcome.svg';
-import totalImg from '../../assets/total.svg';
-import { useTransaction } from "../../hooks/useTransactions";
+        <strong> R$ 20.000,00</strong>
+    </SummaryCard>
+    <SummaryCard>
+        <header>
+            <span>Saídas</span>
+            <ArrowCircleDown size={32} color="#f75a68" />
+        </header>
 
-export function Summary() {
+        <strong> R$ 20.000,00</strong>
+    </SummaryCard>
+    <SummaryCard variant="green">
+        <header>
+            <span>Total</span>
+            <CurrencyDollar size={32} color="#fff" />
+        </header>
 
-    const {transactions} = useTransaction();
+        <strong> R$ 20.000,00</strong>
+    </SummaryCard>
     
-    const summary = transactions.reduce((acc, transaction) => {
-        switch(transaction.type){
-            case 'deposit':
-                acc.deposits += transaction.amount;
-                acc.total += transaction.amount;
-                break;
-            case 'withdraw':
-                acc.withdraws += transaction.amount;
-                acc.total -= transaction.amount;
-                break;
-            default:
-                break;
-        }
-        return acc;
-    }, {
-        deposits: 0,
-        withdraws: 0,
-        total: 0
-    } );
-
-    return (
-        <Container>
-
-            <div>
-                <header> <p>Entradas</p>
-                <img src={incomeImg} alt="Entradas" /> 
-                </header>
-                <strong> {new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
-                }).format(summary.deposits)}</strong>
-            </div>
-            <div>
-                <header> <p>Entradas</p>
-                <img src={outcomeImg} alt="Saidas" /> 
-                </header>
-                <strong>-  {new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
-                }).format(summary.withdraws)}</strong>
-            </div>
-            <div className='highlight-background'>
-                <header> <p>Total</p>
-                <img src={totalImg} alt="Total" /> 
-                </header>
-                <strong> {new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
-                }).format(summary.total)}</strong>
-            </div>
-        
-        </Container>
-    )
+</SummaryContainer>)
 }

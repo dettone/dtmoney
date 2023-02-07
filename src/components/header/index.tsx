@@ -1,18 +1,15 @@
-import logoImg from "../../assets/logo.svg";
-import { Container, Content } from "./styles";
+import { HeaderContainer, HeaderContent, NewTransactionButton } from "./styles";
 
+import logoImg from '../../assets/logo.svg'
 
-interface HeaderProps {
-  onOpenNewTransactionModal: () => void;
-}
-export function Header({onOpenNewTransactionModal} : HeaderProps)   {
+export function Header() {
+    return (
+        <HeaderContainer>
+            <HeaderContent>
+                <img src={logoImg} alt="" />
+        <NewTransactionButton>Nova Transação</NewTransactionButton> 
+            </HeaderContent>
+        </HeaderContainer>
+    )
 
-  return (
-    <Container>
-      <Content> 
-          <img src={logoImg} alt="dt money" />
-          <button type="button" onClick={onOpenNewTransactionModal}>Nova Transação</button>
-      </Content>
-    </Container>
-  );
 }
