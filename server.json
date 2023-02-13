@@ -1,0 +1,36 @@
+{
+  "transactions": [
+    {
+      "id": 1,
+      "description": "Desenvolvimento de site",
+      "type": "income",
+      "category": "Venda",
+      "price": 14000,
+      "createdAt": "2023-02-13T18:51:56.080Z"
+    },
+    {
+      "id": 2,
+      "description": "Hamburguer",
+      "type": "outcome",
+      "category": "Alimentação",
+      "price": 50,
+      "createdAt": "2023-02-13T18:52:56.080Z"
+    },
+    {
+      "description": "Batata",
+      "price": 2,
+      "category": "Mercado",
+      "type": "outcome",
+      "createdAt": "2023-02-13T23:24:09.677Z",
+      "id": 3
+    },
+    {
+      "description": "Roupa Basica",
+      "price": 50,
+      "category": "Vestuario",
+      "type": "outcome",
+      "createdAt": "2023-02-13T23:42:06.051Z",
+      "id": 4
+    }
+  ]
+}

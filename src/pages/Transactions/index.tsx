@@ -1,46 +1,46 @@
-import { Header } from "../../components/Header";
-import { SearchForm } from "../../components/SearchForm";
-import { Summary } from "../../components/Summary";
-import { PriceHighLight, TransactionContainer, TransactionsTable } from "./styles";
+import { useContext } from 'react'
+import { Header } from '../../components/Header'
+import { SearchForm } from '../../components/SearchForm'
+import { Summary } from '../../components/Summary'
+import { TransactionsContext } from '../../contexts/TransactionsContext'
+import { dateFormatter, priceFormatter } from '../../utils/formatter'
+import {
+  PriceHighLight,
+  TransactionContainer,
+  TransactionsTable,
+} from './styles'
 
-
-export function Transactions(){
-    return (
-        <div>
-           <Header /> 
-           <Summary />
-        <TransactionContainer>
-            <SearchForm />
-           <TransactionsTable>
-            <tbody>
-                <tr>
-                    <td width="50%"> Desenvolvimento de site </td>
-                    <td><PriceHighLight variant = 'income'> R$ 20.200,00 </PriceHighLight></td>
-                    <td> Venda </td>
-                    <td> 13/04/2022</td>
+export function Transactions() {
+  const { transactions } = useContext(TransactionsContext)
+  return (
+    <div>
+      <Header />
+      <Summary />
+      <TransactionContainer>
+        <SearchForm />
+        <TransactionsTable>
+          <tbody>
+            {transactions.map((transaction) => {
+              return (
+                <tr key={transaction.id}>
+                  <td width="50%"> {transaction.description} </td>
+                  <td>
+                    <PriceHighLight variant={transaction.type}>
+                      {transaction.type === 'outcome' && '- '}
+                      {priceFormatter.format(transaction.price)}
+                    </PriceHighLight>
+                  </td>
+                  <td> {transaction.category} </td>
+                  <td>
+                    {' '}
+                    {dateFormatter.format(new Date(transaction.createdAt))}{' '}
+                  </td>
                 </tr>
-                <tr>
-                    <td width="50%"> Hambúrguer </td>
-                    <td> <PriceHighLight variant = 'outcome'>- R$ 2.200,00 </PriceHighLight></td>
-                    <td> Alimentação </td>
-                    <td> 13/04/2022</td>
-                </tr>
-                <tr>
-                    <td width="50%"> Desenvolvimento de site </td>
-                    <td> <PriceHighLight variant = 'income'> R$ 20.200,00 </PriceHighLight> </td>
-                    <td> Venda </td>
-                    <td> 13/04/2022</td>
-                </tr>
-                <tr>
-                    <td width="50%"> Desenvolvimento de site </td>
-                    <td> <PriceHighLight variant = 'income'> R$ 20.200,00 </PriceHighLight> </td>
-                    <td> Venda </td>
-                    <td> 13/04/2022</td>
-                </tr>
-            </tbody>
-           </TransactionsTable>
-                       
-        </TransactionContainer>
-        </div>
-    )
+              )
+            })}
+          </tbody>
+        </TransactionsTable>
+      </TransactionContainer>
+    </div>
+  )
 }
